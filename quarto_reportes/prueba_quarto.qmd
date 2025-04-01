@@ -1,0 +1,168 @@
+---
+title: "Probando"
+author: "Bastián Olea Herrera"
+date: 2025-04-01
+lang: es
+language: 
+  title-block-author-single: "Creado por"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-location: left
+theme: pulse
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+library(dplyr)
+library(stringr)
+library(gt)
+```
+
+## Quarto
+
+Quarto enables you to weave ~~together~~ content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+
+:::{.callout-tip title="Aviso" appearance="simple"}
+Note that there are five types of callouts, including: 
+`note`, `tip`, `warning`, `caution`, and `important`.
+:::
+
+
+## Código
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+::: {.column-margin}
+Hi! I'm a side note!
+:::
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+
+::: {.columns}
+::: {.column width="40%"} 
+```{r}
+#| output: false
+tibble(tipo = c("contrato de personal",
+                "contratación directa",
+                "contrato directo")) |> 
+  mutate(tipo2 = case_when(str_detect(tipo, "contrat") & !str_detect(tipo, "personal") ~ "Sí",
+                           .default = "No"))
+```
+:::
+
+::: {.column width="10%"} 
+::: 
+
+::: {.column width="50%" margin-left="20px"}
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+:::
+:::
+
+----
+
+::: {.aside}
+**Lateral:**
+Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. 
+:::
+
+
+## Columnas
+
+:::: {.grid}
+
+::: {.g-col-3}
+First column 
+I would like to have text here
+Sentence becomes longer, it should automatically stay in their column
+:::
+  
+::: {.g-col-9}
+Second column 
+and here
+More text
+
+Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. 
+:::
+  
+::::
+
+
+
+----
+
+:::: {.columns}
+
+::: {.column width="40%"} 
+**Columna izquierda**
+
+Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. Este es un ejemplo. 
+:::
+
+::: {.column width="60%"}
+```{r}
+#| fig.cap: "Figure: Here is a really important caption."
+iris |> 
+  plot()
+```
+:::
+
+:::: 
+
+
+
+----
+
+## Pestañas
+
+::: {.panel-tabset .nav-pills}
+
+## Scatterplot
+Content that will show under first tab
+
+## Boxplot
+```{r}
+mtcars |> plot()
+```
+
+## Barplot
+```{r}
+iris |> plot()
+```
+
+:::
+
+
+
+
+----
+
+
+## Bloques
+
+::: {style="max-height: 400px; overflow-y: scroll;"}
+Contenido muy largo
+```{r}
+#| echo: false
+iris |> 
+  gt() |> 
+  data_color(columns = Sepal.Length,
+             palette = c("white", "purple4"))
+```
+:::

@@ -1,0 +1,49 @@
+---
+title: "Iris"
+format: 
+  html:
+    embed-resources: true
+params:
+  especie: "virginica"
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+library(dplyr)
+library(ggplot2)
+```
+
+## `r params$especie`
+
+Reporte para la especie `r params$especie`
+```{r}
+#| echo: false
+
+iris |> 
+  filter(Species == params$especie) |>
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme_void()
+```
+
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(gghighlight)
+
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme_void() +
+  gghighlight(Species == params$especie)
+```

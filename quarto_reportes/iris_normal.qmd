@@ -1,0 +1,22 @@
+---
+title: "Iris"
+format:
+  html:
+    embed-resources: true
+---
+
+Reporte normal
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme_void()
+```
+
