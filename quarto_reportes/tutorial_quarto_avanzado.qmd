@@ -1,0 +1,95 @@
+---
+title: "Untitled"
+format: html
+---
+
+## Avanzado
+### css
+
+```yaml
+css: style.scss
+```
+
+```scss
+/*-- scss:defaults --*/
+$h2-font-size:          1.6rem !default;
+$headings-font-weight:  500 !default;
+$toc-color: #127679;
+
+/*-- scss:rules --*/
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
+}
+```
+
+```css
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 84px;
+}
+
+h2 {
+font-size: 140%;
+margin-top: 24px;
+}
+```
+
+
+
+### Viñetas debajo de figuras
+```r
+#| fig.cap = "Figure: Here is a really important caption."
+```
+
+
+### Enlaces internos
+
+```markdown
+# Data wrangling {#section-2}
+```
+
+```markdown
+Here is the link to the [section 2](#section-2) of the document!
+```
+
+### Ocultar código
+
+```yaml
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+```
+
+
+
+### HTML
+```html
+<div style = "background: red;">
+polli
+</div>
+```
+
+
+### Bloques
+
+
+## Bloques
+````markdown
+::: {style="max-height: 400px; overflow-y: scroll;"}
+contenido largo
+:::
+````
+
+
+
+### Condicionalidad
+
+```markdown
+::: {.content-visible when-format="html"}
+```
+
+
+
+
+
+
