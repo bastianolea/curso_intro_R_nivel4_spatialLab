@@ -2,7 +2,9 @@
 title: "Clase 1"
 date: 01-04-2025
 lang: es
-format: html
+format:
+  html:
+    embed-resources: true
 ---
 
 Quarto es una herramienta que te permite generar documentos y reportes de manera muy sencilla utilizando bloques de código de R. En estos reportes puedes incluir tablas, gráficos, y mucho más, de forma atractiva, para poder compartir tus análisis y resultados con otras personas.
