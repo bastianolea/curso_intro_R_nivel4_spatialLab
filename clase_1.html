@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Clase 1</title>
+<title>Reportes Quarto en R: clase 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3079,13 +3079,42 @@ vertical-align: -.125em;
 <body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#crear-un-reporte-quarto" id="toc-crear-un-reporte-quarto" class="nav-link active" data-scroll-target="#crear-un-reporte-quarto">Crear un reporte Quarto</a></li>
+  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown">Markdown</a>
+  <ul class="collapse">
+  <li><a href="#otras-posibilidades" id="toc-otras-posibilidades" class="nav-link" data-scroll-target="#otras-posibilidades">Otras posibilidades</a></li>
+  </ul></li>
+  <li><a href="#configuración-básica" id="toc-configuración-básica" class="nav-link" data-scroll-target="#configuración-básica">Configuración básica</a>
+  <ul class="collapse">
+  <li><a href="#títulos" id="toc-títulos" class="nav-link" data-scroll-target="#títulos">Títulos</a></li>
+  <li><a href="#índices-o-tablas-de-contenido" id="toc-índices-o-tablas-de-contenido" class="nav-link" data-scroll-target="#índices-o-tablas-de-contenido">Índices o tablas de contenido</a></li>
+  <li><a href="#temas" id="toc-temas" class="nav-link" data-scroll-target="#temas">Temas</a></li>
+  <li><a href="#autocontenido" id="toc-autocontenido" class="nav-link" data-scroll-target="#autocontenido">Autocontenido</a></li>
+  </ul></li>
+  <li><a href="#disposición" id="toc-disposición" class="nav-link" data-scroll-target="#disposición">Disposición</a>
+  <ul class="collapse">
+  <li><a href="#columnas" id="toc-columnas" class="nav-link" data-scroll-target="#columnas">Columnas</a></li>
+  <li><a href="#pestañas" id="toc-pestañas" class="nav-link" data-scroll-target="#pestañas">Pestañas</a></li>
+  <li><a href="#contenido-al-margen" id="toc-contenido-al-margen" class="nav-link" data-scroll-target="#contenido-al-margen">Contenido al margen</a></li>
+  </ul></li>
+  <li><a href="#código" id="toc-código" class="nav-link" data-scroll-target="#código">Código</a>
+  <ul class="collapse">
+  <li><a href="#código-entre-el-texto" id="toc-código-entre-el-texto" class="nav-link" data-scroll-target="#código-entre-el-texto">Código entre el texto</a></li>
+  </ul></li>
+  <li><a href="#reportes-parametrizados" id="toc-reportes-parametrizados" class="nav-link" data-scroll-target="#reportes-parametrizados">Reportes parametrizados</a></li>
+  </ul>
+</nav>
 </div>
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Clase 1</h1>
+<h1 class="title">Reportes Quarto en R: clase 1</h1>
 </div>
 
 
@@ -3369,10 +3398,14 @@ fontsize: &quot;20px&quot;</code></pre>
 <hr>
 </section>
 </section>
-<section id="reportes-parametrizados" class="level2">
+<section id="reportes-parametrizados" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="reportes-parametrizados">Reportes parametrizados</h2>
-<p>Los <a href="https://posit.co/blog/parameterized-quarto/">reportes parametrizados</a> nos permiten cambiar aspectos del código del documento al cambiar una variable definida en el encabezado del mismo. Por ejemplo, si tengo un documento que filtre mis datos, definimos la variable en el encabezado bajo la etiqueta <code>params</code>:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<p>Los <a href="https://posit.co/blog/parameterized-quarto/">reportes parametrizados</a> nos permiten cambiar aspectos del código del documento al cambiar una variable definida en el encabezado del mismo.</p>
+<p>Si tengo un reporte donde los resultados dependen de un filtro en mis datos, definimos el valor de la variable a filtrar en el encabezado bajo la etiqueta <code>params</code>:</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>(Este ejemplo se encuentra en el <a href="https://github.com/bastianolea/curso_intro_R_nivel4_spatialLab">repositorio del curso,</a> carpeta <code>quarto_reportes</code>, archivo <code>iris_params.qmd</code>)</p>
+</div></div><div class="sourceCode" id="cb23"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">especie</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;virginica&quot;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Luego, en el código del documento, puedo acceder al contenido de <code>especie</code> usando <code>params$especie</code>. Entonces puedo cambiar el valor de <code>especie</code> desde el encabezado del reporte.</p>
 <p>La idea de poder hacer esto es diseñar el reporte para producir resultados en base a la variable parametrizada, para que podamos obtener múltiples reportes solamente cambiando la variable parametrizada. De este modo, podemos obtener el reporte desde un script distinto con la función <code>quarto_render()</code> del paquete <code>{quarto}</code>:</p>

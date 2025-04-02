@@ -1,10 +1,12 @@
 ---
-title: "Clase 1"
+title: "Reportes Quarto en R: clase 1"
 date: 01-04-2025
 lang: es
 format:
   html:
     embed-resources: true
+    toc: true
+    toc-expand: 3
 ---
 
 Quarto es una herramienta que te permite generar documentos y reportes de manera muy sencilla utilizando bloques de código de R. En estos reportes puedes incluir tablas, gráficos, y mucho más, de forma atractiva, para poder compartir tus análisis y resultados con otras personas.
@@ -379,7 +381,14 @@ De esta forma podemos agregar texto que proviene desde nuestros datos: el datase
 
 ## Reportes parametrizados
 
-Los [reportes parametrizados](https://posit.co/blog/parameterized-quarto/) nos permiten cambiar aspectos del código del documento al cambiar una variable definida en el encabezado del mismo. Por ejemplo, si tengo un documento que filtre mis datos, definimos la variable en el encabezado bajo la etiqueta `params`: 
+Los [reportes parametrizados](https://posit.co/blog/parameterized-quarto/) nos permiten cambiar aspectos del código del documento al cambiar una variable definida en el encabezado del mismo. 
+
+
+Si tengo un reporte donde los resultados dependen de un filtro en mis datos, definimos el valor de la variable a filtrar en el encabezado bajo la etiqueta `params`: 
+
+::: {.aside}
+(Este ejemplo se encuentra en el [repositorio del curso,](https://github.com/bastianolea/curso_intro_R_nivel4_spatialLab) carpeta `quarto_reportes`, archivo `iris_params.qmd`) 
+:::
 
 ```yaml
 params:
