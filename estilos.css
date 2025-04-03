@@ -1,0 +1,24 @@
+
+h2 {
+  color: #d3687f;
+  margin-top: 64px;
+}
+
+h3 {
+  font-size: 110%;
+}
+
+
+.destacar {
+  color: yellow;
+  background-color: grey;
+  border-radius: 5px;
+}
+
+
+.detalle {
+  color: #f9f9f9;
+  background-color: grey;
+  padding: 3px;
+  border-radius: 5px;
+}

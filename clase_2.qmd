@@ -1,0 +1,167 @@
+---
+title: "Clase 2: Quarto"
+format:
+  html:
+    embed-resources: true
+    toc: true
+author: "Bastián Olea Herrera"
+date: 2025-04-01
+lang: es
+language: 
+  title-block-author-single: "Creado por"
+fontsize: "14px"
+mainfont: Montserrat
+css: estilos.css
+theme: tema.scss
+editor_options: 
+  chunk_output_type: inline
+---
+
+Si quiere ir a la sección importante del documento, haga [clic aquí.](#seccion-importante)
+
+## Personalización
+
+### Imágenes
+
+[Enlace](www.spatiallab.cl)
+
+![](imagenes/mapache.jpeg){style="width:40%;"}
+
+Cambiar el estilo de [una palabra.]{style="color: pink;"}
+
+Cambiar el [tamaño]{style="font-size:200%;"} de un texto.
+
+
+Cambiar los colores del documento
+
+## Bloques de código
+
+```r
+library(dplyr)
+iris |> filter()
+```
+
+```yaml
+# colores del texto
+backgroundcolor: "#F0EDCC"
+fontcolor: "#02343F"
+linkcolor: "#02343F"
+```
+
+## Hoja de estilos CSS
+
+`h2`, `h3`
+
+[Agregar estilos a el documento CSS]{.destacar}
+
+
+[Aplicar a cualquier texto que queramos]{.detalle}
+
+Cambiar el color de la tabla de contenidos
+https://quarto.org/docs/presentations/revealjs/themes.html#sass-variables
+
+
+## Tipografías
+https://fonts.google.com
+
+----
+
+## Importante {#seccion-importante}
+
+::: {style="max-height: 400px; overflow-y: scroll;"}
+
+```{r}
+iris
+```
+
+:::
+
+
+## Videos
+
+Usando un shortcode
+
+{{< video https://www.youtube.com/watch?v=093zcHXsKs4 >}}
+
+https://github.com/sellorm/quarto-social-embeds
+
+
+## Extensiones
+https://quarto.org/docs/extensions/
+
+https://github.com/quarto-ext/fontawesome
+
+Hablar sobre casas {{< fa house >}}
+
+:::{.callout-warning title="Aviso" appearance="simple"}
+Este reporte es el que creamos durante la clase. Si buscas la guía con instrucciones para generar un reporte, está en el archivo `clase_1.qmd`!
+:::
+https://quarto.org/docs/authoring/callouts.html
+
+
+
+
+https://quarto.org/docs/extensions/listing-journals.html
+
+
+
+## Inclusiones
+
+<!-- {{< include quarto_reportes/iris_normal.qmd >}} -->
+
+
+`r iris$Species[1]`
+
+```{r}
+#| echo: true
+
+library(ggplot2)
+
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme_void()
+```
+
+
+## Iteraciones
+
+```{r}
+#| results: asis
+#| warning: false
+#| message: false
+#| echo: false
+
+library(pander)
+library(dplyr)
+# install.packages("pander")
+
+# iteración
+for (especie in unique(iris$Species)) {
+# especie = "setosa"
+
+pandoc.header(especie, level = 2)
+
+grafico <- iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point() +
+  theme_void() +
+  gghighlight::gghighlight(Species == "setosa")
+
+plot(grafico)
+
+largo_petalo <- iris |> 
+  filter(Species == especie) |> 
+  slice_max(Petal.Length) |> 
+  pull(Petal.Length) |> 
+  unique()
+
+pandoc.p(paste("La observación más alta en largo de pétalos es:", largo_petalo))
+
+pandoc.horizontal.rule()
+}
+```
+
