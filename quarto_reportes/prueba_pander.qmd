@@ -1,0 +1,48 @@
+---
+title: ""
+format:
+  html: 
+    toc: true
+---
+
+```{r}
+#| message: false
+
+library(pander)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+#| results: asis
+
+pander::pandoc.emphasis("Hola")
+```
+
+```{r}
+#| results: asis
+#| echo: false
+#| message: false
+#| warning: false
+
+especie = "setosa"
+
+for (especie in unique(iris$Species)) {
+
+pandoc.header(especie, 3)
+
+grafico <- iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point(size = 4) +
+  theme_void() +
+  gghighlight::gghighlight(Species == especie)
+
+plot(grafico)
+
+pandoc.p("**Chao**")
+
+pandoc.horizontal.rule()
+}
+```
+

@@ -1,27 +1,45 @@
 ---
-title: "Untitled"
-format: html
+title: "Reportes Quarto en R: clase 1"
+date: 03-04-2025
+lang: es
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-expand: 3
 ---
 
-## Avanzado
-### css
 
+
+## Imágenes
+
+<!-- ![]() -->
+
+
+
+## Personalización
+
+
+Cambiar el estilo de [una palabra]{style="color: pink;"}
+
+
+Cambiar colores
+
+```yaml
+backgroundcolor: "#fcfafe"
+fontcolor: "#2b1050"
+linkcolor: "#7b2ddd"
+```
+
+
+
+### CSS
+Cargar archivo css
 ```yaml
 css: style.scss
 ```
 
-```scss
-/*-- scss:defaults --*/
-$h2-font-size:          1.6rem !default;
-$headings-font-weight:  500 !default;
-$toc-color: #127679;
-
-/*-- scss:rules --*/
-h1, h2, h3, h4, h5, h6 {
-  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
-}
-```
-
+Cambiar estilos
 ```css
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 84px;
@@ -33,6 +51,56 @@ margin-top: 24px;
 }
 ```
 
+
+#### Clases CSS
+
+en theme.scss
+```scss
+.highlighted {
+  color: $theme-light-link;
+  font-weight: bold;
+}
+```
+
+```markdown
+[This text is highlighted]{.highlighted}. 
+
+This text is not.
+```
+
+
+
+https://www.realtimecolors.com/?colors=2b1050-fcfafe-7b2ddd-ec8ac8-e45b88&fonts=Inter-Inter
+
+
+
+### Temas
+https://quarto.org/docs/presentations/revealjs/themes.html#sass-variables
+
+#### Cambiar color del índice
+
+```yaml
+theme: theme.scss
+```
+
+```scss
+/*-- scss:defaults --*/
+$toc-color: #127679;
+```
+
+### Tipografías
+
+en theme.scss
+```scss
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+$font-family-sans-serif: "Montserrat", sans-serif;
+```
+
+
+
+----
 
 
 ### Viñetas debajo de figuras
@@ -51,13 +119,14 @@ margin-top: 24px;
 Here is the link to the [section 2](#section-2) of the document!
 ```
 
+
 ### Ocultar código
 
 ```yaml
 format:
   html:
     code-fold: true
-    code-summary: "Show the code"
+    code-summary: "Mostrar código"
 ```
 
 
@@ -69,11 +138,20 @@ polli
 </div>
 ```
 
+### Videos
+```markdown
+\{{\< video https://www.youtube.com/embed/wo9vZccmqwc >}}
+```
 
-### Bloques
+{{< video https://www.youtube.com/embed/wo9vZccmqwc >}}
+
+
+instagram: https://github.com/sellorm/quarto-social-embeds
+
 
 
 ## Bloques
+
 ````markdown
 ::: {style="max-height: 400px; overflow-y: scroll;"}
 contenido largo
@@ -82,14 +160,39 @@ contenido largo
 
 
 
-### Condicionalidad
 
-```markdown
-::: {.content-visible when-format="html"}
+
+
+
+
+
+
+## Extensiones
+https://quarto.org/docs/extensions/
+
+### Símbolos 
+FontAwesome
+
+```bash
+quarto install extension quarto-ext/fontawesome
 ```
 
+`Holis {{< fa door-closed >}} {{< fa user-doctor >}}`
+
+### Imágenes
+https://quarto.org/docs/output-formats/html-lightbox-figures.html
+
+### Artículos académicos
+https://quarto.org/docs/extensions/listing-journals.html
 
 
 
 
 
+## Inclusiones
+<!-- {{< include iris_normal.qmd >}} -->
+
+
+## Generar bloques con R
+
+{{< include prueba_pander.qmd >}}

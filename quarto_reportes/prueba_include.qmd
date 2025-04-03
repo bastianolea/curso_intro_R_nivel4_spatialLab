@@ -1,0 +1,14 @@
+---
+title: "Prueba include"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: true
+---
+
+## Pruebita
+
+{{< include iris_normal.qmd >}}
+
+Holi polli
