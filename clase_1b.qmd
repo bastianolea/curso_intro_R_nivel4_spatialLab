@@ -1,0 +1,199 @@
+---
+title: "Clase 1: Quarto"
+author: "Bastián Olea Herrera"
+date: 2025-04-01
+lang: es
+language: 
+  title-block-author-single: "Creado por"
+theme: lux
+fontsize: "14px"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    toc-expand: true
+    other-links: 
+       - text: Contacto
+         href: https://bastianolea.rbind.io
+       - text: Sitio web
+         href: https://bastianolea.rbind.io
+editor_options: 
+  chunk_output_type: inline
+---
+
+:::{.callout-warning title="Aviso" appearance="simple"}
+Este reporte es el que creamos durante la clase. Si buscas la guía con instrucciones para generar un reporte, está en el archivo `clase_1.qmd`!
+:::
+
+```{r}
+#| message: false
+#| echo: false
+#| output: false
+library(dplyr)
+library(ggplot2)
+
+iris <- iris |> filter(Species != "virginica")
+
+cantidad_especies <- n_distinct(iris$Species)
+
+texto_especies <- paste(unique(iris$Species), collapse = ", ")
+
+
+```
+
+
+## Markdown
+
+Esta es la clase de Quarto[^1]. Vamos a ver los principios de markdown:
+
+[^1]: Es la primera de 2 sesiones.
+
+-   **negrita**
+-   *itálica*
+-   ~~tachado~~
+-   `código`[^2]
+-   [Sitio web sobre markdown](https://quarto.org/docs/authoring/markdown-basics.html)
+
+[^2]: lo que quede dentro de las comillas nos e va a interpretar, sino que va a salir directamente como está escrito
+
+`[Sitio web sobre markdown](https://quarto.org/docs/authoring/markdown-basics.html)`
+
+----
+
+## Temas
+https://quarto.org/docs/output-formats/html-themes.html
+
+
+## Código
+
+El dataset Iris cuenta con `r nrow(iris)` observaciones y `r length(iris)` variables. La variable de especies tiene `r cantidad_especies` tipos de plantas distintas: `r texto_especies`.
+
+Para cargar el dataset Iris, ejecutamos `iris`:
+```{r}
+#| eval: false
+iris
+```
+
+
+Insertar un bloque de código (_chunk_):
+
+```{r}
+#| message: false
+
+library(dplyr)
+head(iris)
+```
+
+----
+
+### Gráficos
+
+::: {.aside}
+Este gráfico es morado y muy bonito. Me gusta mucho mucho mucho mucho mucho mucho mucho mucho.
+:::
+
+Estos son los resultados de mi tesis:
+
+```{r}
+#| echo: false
+
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width) +
+  geom_point(color = "purple4", size = 4, alpha = 0.4) +
+  theme_minimal()
+```
+
+
+
+----
+
+### Columnas
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 6
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width) +
+  geom_point(color = "orange2", size = 4, alpha = 0.4) +
+  theme_minimal()
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="35%"}
+
+En este gráfico podemos ver que los puntitos son muy anaranjados. Ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo, ejemplo.
+::: 
+
+::::
+
+
+### Pestañas
+
+::: {.aside}
+```{r}
+library(gt)
+iris |> 
+  head(n = 10)
+```
+:::
+
+::: {.panel-tabset .nav-pills}
+
+#### Explicación
+
+Ahora vamos a ver el dataset, en el gráfico 1 bla bla, en el 2 bla bla...
+
+#### Gráfico 1
+```{r}
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width) +
+  geom_point(color = "red2", size = 4, alpha = 0.4) +
+  theme_minimal()
+```
+
+#### Gráfico por colores
+```{r}
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point(size = 4, alpha = 0.4) +
+  theme_minimal()
+```
+
+#### Gráfico boxplot
+Este es un gráfico de cajas
+```{r}
+iris |> 
+  ggplot() +
+  aes(x = Species, y = Sepal.Width, color = Species, fill = Species) +
+  geom_boxplot(alpha = 0.6) +
+  scale_fill_brewer(palette = "Dark2") +
+  scale_color_brewer(palette = "Dark2") +
+  theme_minimal()
+```
+
+:::
+
+
+----
+
+
+<div style="background: pink; border-radius: 5px; padding: 4px;">
+
+Holaaa
+
+</div>

@@ -1,0 +1,58 @@
+---
+title: "Resultados elecciones"
+format: 
+  html:
+    embed-resources: true
+execute: 
+  echo: false
+params:
+  region_elegida: "Valparaíso"
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(forcats)
+library(gt)
+
+datos <- readr::read_csv2("presidenciales_2021_region.csv")
+
+# region_elegida <- "Los Ríos"
+
+datos_2 <- datos |> 
+  filter(region == params$region_elegida) |> 
+  filter(eleccion == "Primera vuelta") |> 
+  mutate(candidatura = fct_reorder(candidatura, votos))
+
+maximo <- datos_2 |> 
+  slice_max(votos)
+```
+
+En la región de **`r params$region_elegida`**, el candidato con mayor cantidad de votos fue `r maximo$candidatura` y obtuvo `r format(maximo$votos, big.mark = ".")` votos.
+
+```{r}
+#| echo: false
+
+datos_2 |> 
+  ggplot() +
+  aes(y = candidatura,
+      x = votos, 
+      fill = votos) +
+  geom_col() +
+  guides(fill = guide_none()) +
+  scale_fill_gradient(low = "red3", high = "purple3") +
+  theme_minimal()
+```
+
+```{r}
+datos_2 |> 
+  select(candidatura, votos) |> 
+  arrange(desc(votos)) |> 
+  gt() |> 
+  data_color(columns = votos, 
+             palette = c("white", "purple3"))
+```
