@@ -1,20 +1,30 @@
 ---
-  title: "Reportes Quarto en R: clase 2"
-date: 03-04-2025
-lang: es
+title: "Clase 2: Quarto"
 format:
   html:
-  embed-resources: true
-toc: true
-toc-expand: 3
+    embed-resources: true
+    toc: true
+author: "Bastián Olea Herrera"
+date: 2025-04-01
+lang: es
+language: 
+  title-block-author-single: "Creado por"
+fontsize: "14px"
+mainfont: Montserrat
+css: estilos.css
+theme: tema.scss
+editor_options: 
+  chunk_output_type: inline
 ---
 
+:::{.callout-warning title="Aviso" appearance="simple"}
+Este reporte es el que creamos durante la clase. Si buscas la guía con instrucciones para generar un reporte, está en el archivo `clase_1.qmd`!
+:::
 
 
-En esa clase veremos más maneras de personalizar reportes Quarto.
+Si quiere ir a la sección importante del documento, haga [clic aquí.](#seccion-importante)
 
-## Elementos
-
+## Personalización
 
 ### Imágenes
 
@@ -22,7 +32,14 @@ En esa clase veremos más maneras de personalizar reportes Quarto.
 
 ![](imagenes/mapache.jpeg){style="width:40%;"}
 
-### Bloques de código
+Cambiar el estilo de [una palabra.]{style="color: pink;"}
+
+Cambiar el [tamaño]{style="font-size:200%;"} de un texto.
+
+
+Cambiar los colores del documento
+
+## Bloques de código
 
 ```r
 library(dplyr)
@@ -36,12 +53,26 @@ fontcolor: "#02343F"
 linkcolor: "#02343F"
 ```
 
+## Hoja de estilos CSS
+
+`h2`, `h3`
+
+[Agregar estilos a el documento CSS]{.destacar}
 
 
-### Enlaces a partes del documento {#seccion-importante}
+[Aplicar a cualquier texto que queramos]{.detalle}
+
+Cambiar el color de la tabla de contenidos
+https://quarto.org/docs/presentations/revealjs/themes.html#sass-variables
 
 
-### Bloques HTML
+## Tipografías
+https://fonts.google.com
+
+----
+
+## Importante {#seccion-importante}
+
 ::: {style="max-height: 400px; overflow-y: scroll;"}
 
 ```{r}
@@ -51,9 +82,7 @@ iris
 :::
 
 
-
-
-### Insertar videos
+## Videos
 
 Usando un shortcode
 
@@ -62,8 +91,7 @@ Usando un shortcode
 https://github.com/sellorm/quarto-social-embeds
 
 
-
-### Símbolos
+## Extensiones
 https://quarto.org/docs/extensions/
 
 https://github.com/quarto-ext/fontawesome
@@ -78,53 +106,32 @@ https://quarto.org/docs/authoring/callouts.html
 
 
 
-----
+https://quarto.org/docs/extensions/listing-journals.html
 
 
-
-## Personalización
-
-
-### Modificar estilos CSS
-
-`h2`, `h3`
-
-[Agregar estilos a el documento CSS]{.destacar}
-
-
-[Aplicar a cualquier texto que queramos]{.detalle}
-
-Cambiar el color de la tabla de contenidos
-https://quarto.org/docs/presentations/revealjs/themes.html#sass-variables
-
-
-### Crear clases CSS
-
-Cambiar el estilo de [una palabra.]{style="color: pink;"}
-
-Cambiar el [tamaño]{style="font-size:200%;"} de un texto.
-
-
-Cambiar los colores del documento
-
-### Usar tipografías web
-https://fonts.google.com
-
-
-
-
-----
 
 ## Inclusiones
 
 <!-- {{< include quarto_reportes/iris_normal.qmd >}} -->
 
 
+`r iris$Species[1]`
 
-----
+```{r}
+#| echo: true
+
+library(ggplot2)
+
+iris |> 
+  ggplot() +
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme_void()
+```
 
 
-## Generar contenido del reporte desde loops
+## Iteraciones
 
 ```{r}
 #| results: asis
