@@ -1,54 +1,80 @@
 ---
-  title: "Reportes Quarto en R: clase 2"
+title: "Reportes Quarto en R: clase 2"
 date: 03-04-2025
 lang: es
 format:
   html:
-  embed-resources: true
-toc: true
-toc-expand: 3
+    embed-resources: true
+    toc: true
+    toc-expand: 3
 ---
 
+En esa clase veremos nuevos elementos para agregar a nuestros reportes, y más maneras de personalizar reportes Quarto.
 
-
-En esa clase veremos más maneras de personalizar reportes Quarto.
-
-## Elementos
-
+## Elementos{#seccion-importante}
 
 ### Imágenes
 
-[Enlace](www.spatiallab.cl)
+Para agregar una imagen en un reporte, se usa un código similar al de los enlaces: `![]()`, poniendo la ruta de la imagen dentro del paréntesis. La ruta de la imágen tiene que ir en relación al documento Quarto.
 
-![](imagenes/mapache.jpeg){style="width:40%;"}
+Por ejemplo, para agregar una imagen que se encuentra en una carpeta `imagenes`:
+
+`![](imagenes/mapache.jpeg)`
+
 
 ### Bloques de código
 
+Si queremos mostrar código dentro de nuestro reporte, pero sin ejecutarlo, o bien, para mostrar código de cualquier otro lenguaje, creamos _bloques_ de código usando tildes o comillas invertidas `` ` ``
+
+Para crear un bloque de código, agregamos tres o más comillas invertidas antes y después del código:
+
+````
+```
+library(dplyr)
+iris |> 
+  filter(Species == "setosa")
+```
+````
+
+Para que el código aparezca con el formato correcto al lenguaje usado, ponemos el nombre del lenguaje luego de las comillas de apertura del bloque:
+
+::::{.columns}
+
+:::{.column}
+Si agregamos la letra `r` a las comillas de apertura:
+````
 ```r
 library(dplyr)
-iris |> filter()
+iris |> 
+  filter(Species == "setosa")
 ```
-
-```yaml
-# colores del texto
-backgroundcolor: "#F0EDCC"
-fontcolor: "#02343F"
-linkcolor: "#02343F"
-```
-
-
-
-### Enlaces a partes del documento {#seccion-importante}
-
-
-### Bloques HTML
-::: {style="max-height: 400px; overflow-y: scroll;"}
-
-```{r}
-iris
-```
-
+````
 :::
+:::{.column}
+Se produce el siguiente resultado:
+```r
+library(dplyr)
+iris |> 
+  filter(Species == "setosa")
+```
+:::
+::::
+
+
+
+### Enlaces a partes del documento
+
+Podemos crear un enlace dentro de nuestro documento que nos lleve a una posición específica dentro del mismo.
+
+Tenemos que agregar el siguiente código después del título o subtítulo al que queremos apuntar: `{#seccion-importante}`, y luego crear un enlace que apunte al mismo texto del ancla que creamos:
+
+`[Este texto te llevará a otra parte del documento](#seccion-importante)`
+
+[Este texto te llevará a otra parte del documento](#seccion-importante)
+
+Esto puede servir para crear índices de manera manual, por ejemplo, para llevar a tus lectores/as a las partes más relevantes de tu reporte, o para referirte a otras secciones de tu reporte y facilitar la navegación para tus usuarios/as.
+
+
 
 
 
@@ -84,10 +110,48 @@ https://quarto.org/docs/authoring/callouts.html
 
 ## Personalización
 
+### Cambiar colores del documento
+
+```yaml
+# colores del texto
+backgroundcolor: "#F0EDCC"
+fontcolor: "#02343F"
+linkcolor: "#02343F"
+```
+
+
+
+### Bloques HTML
+::: {style="max-height: 400px; overflow-y: scroll;"}
+
+```{r}
+iris
+```
+
+:::
+
+
 
 ### Modificar estilos CSS
 
+`![](imagenes/mapache.jpeg){style="width:40%;"}`
+
+
+Cambiar el estilo de [una palabra.]{style="color: pink;"}
+
+Cambiar el [tamaño]{style="font-size:200%;"} de un texto.
+
+
+
+### Modificar hoja de estilos CSS
+Cambiar los colores del documento
+
 `h2`, `h3`
+
+
+### Crear clases CSS
+
+
 
 [Agregar estilos a el documento CSS]{.destacar}
 
@@ -96,16 +160,6 @@ https://quarto.org/docs/authoring/callouts.html
 
 Cambiar el color de la tabla de contenidos
 https://quarto.org/docs/presentations/revealjs/themes.html#sass-variables
-
-
-### Crear clases CSS
-
-Cambiar el estilo de [una palabra.]{style="color: pink;"}
-
-Cambiar el [tamaño]{style="font-size:200%;"} de un texto.
-
-
-Cambiar los colores del documento
 
 ### Usar tipografías web
 https://fonts.google.com
@@ -132,6 +186,7 @@ https://fonts.google.com
 #| message: false
 #| echo: false
 
+library(ggplot2)
 library(pander)
 library(dplyr)
 # install.packages("pander")
