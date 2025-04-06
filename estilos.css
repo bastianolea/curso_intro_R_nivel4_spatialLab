@@ -17,8 +17,11 @@ h3 {
 
 
 .detalle {
-  color: #f9f9f9;
-  background-color: grey;
+  color: #E7E8EA;
+  background-color: #9A9A9A;
   padding: 3px;
   border-radius: 5px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+$font-family-sans-serif: "Montserrat", sans-serif;

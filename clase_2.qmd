@@ -7,6 +7,7 @@ format:
     embed-resources: true
     toc: true
     toc-expand: 3
+css: estilos.css
 ---
 
 En esa clase veremos nuevos elementos para agregar a nuestros reportes, y más maneras de personalizar reportes Quarto.
@@ -81,25 +82,52 @@ Esto puede servir para crear índices de manera manual, por ejemplo, para llevar
 
 ### Insertar videos
 
-Usando un shortcode
+Usando un [shortcode](https://quarto.org/docs/authoring/shortcodes.html), podemos insertar un video de Youtube con facilidad:
+
+```{shortcodes=false}
+{{< video https://www.youtube.com/watch?v=093zcHXsKs4 >}}
+```
 
 {{< video https://www.youtube.com/watch?v=093zcHXsKs4 >}}
 
-https://github.com/sellorm/quarto-social-embeds
+Si necesitas insertar videos desde otras plataformas, [revisa esta extensión de Quarto](https://github.com/sellorm/quarto-social-embeds), o bien siempre puedes insertar cualquier cosa que desees usando código html directamente en el documento.
 
 
 
 ### Símbolos
-https://quarto.org/docs/extensions/
 
-https://github.com/quarto-ext/fontawesome
+Podemos agregar símbolos a nuestro texto, por ejemplo para agregar a los títulos, en numeraciones, utilizar como un símbolo de información o para destacar algún elemento, [instalando una extensión](https://github.com/quarto-ext/fontawesome) que nos permite poner [símbolos de Font Awesome](https://fontawesome.com/search) en nuestros documentos.
 
-Hablar sobre casas {{< fa house >}}
+La extensión se llama [`fontawesome`](https://github.com/quarto-ext/fontawesome). Para instalarla, en RStudio, en la pestaña de _Terminal_ (al lado de la pestaña de Consola), ejecuta el siguiente código:
+
+```bash
+quarto add quarto-ext/fontawesome
+```
+
+Una vez instalada, puedes agregar símbolos {{< fa heart >}} con el shortcode `fa` seguido del nombre del ícono (que encuentras en el sitio web de [Font Awesome](https://fontawesome.com/search)):
+
+```{shortcodes=false}
+Casas {{< fa house >}}
+```
+
+Puedes encontrar [más extensiones de Quarto en este enlace](https://quarto.org/docs/extensions/)
+
+
+
+### Avisos
+
+Crea fácilmente recuadros que destaquen alguna alerta, información o consejo en tu documento, [creando un bloque de avisos (_callouts_)](https://quarto.org/docs/authoring/callouts.html):
+
+```markdown
+:::{.callout-warning title="Aviso" appearance="simple"}
+Este es un aviso muy importante!
+:::
+```
 
 :::{.callout-warning title="Aviso" appearance="simple"}
-Este reporte es el que creamos durante la clase. Si buscas la guía con instrucciones para generar un reporte, está en el archivo `clase_1.qmd`!
+Este es un aviso muy importante!
 :::
-https://quarto.org/docs/authoring/callouts.html
+
 
 
 
@@ -112,6 +140,7 @@ https://quarto.org/docs/authoring/callouts.html
 
 ### Cambiar colores del documento
 
+Desde el encabezado de un documento cuarto podemos agregar etiquetas que nos permiten cambiar fácilmente los colores de un documento. Los códigos necesarios para cambiar los tres colores más comunes de un documento (fondo, texto y enlaces) son los siguientes:
 ```yaml
 # colores del texto
 backgroundcolor: "#F0EDCC"
@@ -120,51 +149,137 @@ linkcolor: "#02343F"
 ```
 
 
+### Modificar estilos CSS
+
+Poema especificar el estilo de cualquier palabra, oración o elemento de nuestro documento si es que está entre corchetes y agregamos llaves después del corchete de cierre con un estilo CSS personalizado.
+
+Por ejemplo, si queremos hacer que una imagen no sea tan ancha, agregamos el estilo `width:40%;`:
+
+`![](imagenes/mapache.jpeg){style="width:40%;"}`
+
+![](imagenes/mapache.jpeg){style="width:40%;"}
+
+
+También podemos cambiar el estilo específico de [una palabra.]{style="color: pink;"}
+
+`Estilo de [una palabra.]{style="color: pink;"}`
+
+O cambiar el [tamaño]{style="font-size:200%;"} de un texto.
+
+`[tamaño]{style="font-size:200%;"} de un texto.`
+
+
+
+### Modificar hoja de estilos CSS
+
+Si la personalización que queremos realizar es más general a través de nuestros documentos, podemos modificar la hoja de estilos CSS del documento completo, para definir estilos para elementos determinados, tales como títulos, subtítulos, párrafos, enlaces y más.
+
+Para esto, primero tenemos que crear la hoja de estilos. Crea un archivo vacío desde RStudio que tenga la extensión `.css`, por ejemplo `estilos.css`. Dentro de este documento puedes utilizar el código CSS para cambiar el estilo de cualquier elemento, o de cualquier clase usada en el documento.
+
+Luego, tienes que especificar que tu documento Quarto utilice la hoja de estilo que creaste. Agrega al siguiente código en el encabezado:
+
+```yaml
+css: estilos.css
+```
+
+Dentro de la hoja de estilos, puedes cambiar la apariencia de los títulos principales (`h1`), títulos secundarios (`h2`, `h3`, `h4`, etc.), enlaces (`a`), párrafos (`p`), y más.
+
+Por ejemplo, para cambiar los colores de los títulos de nivel dos, agregamos al siguiente código a la hoja de estilos `estilos.css`:
+
+```css
+h2 {
+  color: #d3687f;
+  margin-top: 64px;
+}
+```
+
+Si queremos agrandar o achicar el texto de un título en específico, agregamos el siguiente código a la hoja de estilos:
+
+```css
+h3 {
+  font-size: 110%;
+}
+```
+
+
+### Crear clases CSS
+
+Dentro de la hoja de estilos CSS puedes crear tus propias _clases_. Las clases son estilos personalizados que puedes aplicar fácilmente a cualquier otro elemento de tu documento si es que defines que el elemento es de la clase específica.
+
+Ejemplo, en la hoja de estilos CSS `estilos.css` creamos una nueva clase llamada `.detalle` (los estilos nuevos tienen que empezar con un punto), y luego podemos aplicar este estilo a un párrafo, por ejemplo, si encerramos el párrafo en corchetes y agregamos al final dentro de una llave el nombre de la clase que creamos:
+
+```css
+.detalle {
+  color: #f9f9f9;
+  background-color: grey;
+  padding: 3px;
+  border-radius: 5px;
+}
+```
+
+`[Usar una clase definida en al hoja de estilos]{.detalle}`
+
+[Usar una clase definida en al hoja de estilos]{.detalle}
+
+
+### Usar tipografías web
+
+Podemos cambiar la tipografía de nuestro documento por cualquier tipografía web, por ejemplo las de [Google Fonts](https://fonts.google.com), si seguimos las instrucciones de Google Fonts para cargar la tipografía desde la hoja de estilos.
+
+Por ejemplo, si encontramos la tipografía [Montserrat](https://fonts.google.com/specimen/Montserrat) y queremos usarla en nuestro documento, vemos que el código de inserción CSS es el siguiente:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+$font-family-sans-serif: "Montserrat", sans-serif;
+```
+
+Entonces agregamos este código a nuestra hoja de estilos CSS, y además especificamos en el encabezado de nuestro documento que queremos usar esta tipografía como el texto principal del documento:
+```yaml
+mainfont: Montserrat
+```
+
 
 ### Bloques HTML
-::: {style="max-height: 400px; overflow-y: scroll;"}
+Podemos cambiar o especificar el estilo de cualquier contenido de nuestros documentos cuarto si creamos un bloque al cual le especificamos un estilo en específico. Para crear un bloque, encierra el texto o código entre tres símbolos de dos puntos consecutivos, y especifica en el inicio del bloque los estilos CSS que deseas para el contenido.
+
+::: {style="font-size: 80%; line-height: 1.2; color: #B5B5B5; font-style: italic;"}
+
+Por ejemplo, este es un bloque al cual definimos un estilo para que el texto sea más pequeño y aparezca en metálicas y en gris. Todo lo que pongamos dentro de este texto y dentro del bloque aparecerá con ese estilo, y al cerrar el bloque se vuelve a usar el estilo normal del reporte.
+
+:::
+
+
+El bloque anterior fue definido con el siguiente código:
+```markdown
+::: {style="font-size: 80%; line-height: 1.2; color: #B5B5B5; font-style: italic;"}
+
+(contenido)
+
+:::
+
+
+```
+
+También puede resultar útil crear bloques que hagan que sus contenidos se encuentren dentro de un cuadro de un largo específico, de manera que el contenido dentro del cuadro puede ser más largo y el usuario o usuario pueda desplazarse por el contenido haciendo scrolling:
+
+::: {style="max-height: 200px; overflow-y: scroll;"}
 
 ```{r}
+#| echo: false
 iris
 ```
 
 :::
 
-
-
-### Modificar estilos CSS
-
-`![](imagenes/mapache.jpeg){style="width:40%;"}`
-
-
-Cambiar el estilo de [una palabra.]{style="color: pink;"}
-
-Cambiar el [tamaño]{style="font-size:200%;"} de un texto.
-
-
-
-### Modificar hoja de estilos CSS
-Cambiar los colores del documento
-
-`h2`, `h3`
-
-
-### Crear clases CSS
-
-
-
-[Agregar estilos a el documento CSS]{.destacar}
-
-
-[Aplicar a cualquier texto que queramos]{.detalle}
-
-Cambiar el color de la tabla de contenidos
-https://quarto.org/docs/presentations/revealjs/themes.html#sass-variables
-
-### Usar tipografías web
-https://fonts.google.com
-
-
+El bloque anterior contiene una gran cantidad de datos, pero estos datos no llenan la hoja porque están dentro de un bloque con un largo definido. El código usado fue el siguiente: 
+````markdown
+::: {style="max-height: 200px; overflow-y: scroll;"}
+```{{r}}
+#| echo: false
+iris
+```
+:::
+````
 
 
 ----
