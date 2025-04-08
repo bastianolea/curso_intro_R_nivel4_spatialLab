@@ -286,19 +286,126 @@ iris
 
 ## Inclusiones
 
-<!-- {{< include quarto_reportes/iris_normal.qmd >}} -->
+Si generamos contenido en otros documentos Quarto, podemos _incluir_ este contenido en el documento mediante el _shortcode_ de inclusión (_include_):
 
 
+```{shortcodes=false}
+{{< include quarto_reportes/iris_normal.qmd >}}
+```
+
+Dentro del _shortcode_ va el nombre del documento Quarto. El contenido de este documento aparecerá dentro del documento donde lo insertes como si fuera parte del mismo, incluso apareciendo en la tabla de contenido.
 
 ----
 
 
 ## Generar contenido del reporte desde loops
 
+Dentro de un _chunk_ de código, podemos usar funciones que entreguen como output código markdown. Esto nos servirá para construir un documento a partir de un loop o iteración. De este modo, podemos usar nuestros datos para generar una cantidad indeterminada de títulos, subtítulos, párrafos de textos, gráficos o más, que se generarán automáticamente. 
+
+Usaremos el paquete `{pander}` para que el chunk de R retorne contenido en Markdown que Quarto interpretará como parte del documento gracias a la opción `results: asis` definida al principio del chunk:
+
 ```{r}
 #| results: asis
 #| warning: false
 #| message: false
+#| eval: false
+
+library(pander)
+library(dplyr)
+
+largo_petalo <- iris |> 
+  slice_max(Petal.Length) |> 
+  pull(Petal.Length) |> 
+  unique()
+
+pandoc.p(paste("La observación más alta en largo de pétalos es:", largo_petalo))
+
+```
+
+```{r}
+#| results: asis
+#| warning: false
+#| message: false
+#| eval: true
+#| echo: false
+
+library(pander)
+library(dplyr)
+
+largo_petalo <- iris |> 
+  slice_max(Petal.Length) |> 
+  pull(Petal.Length) |> 
+  unique()
+
+columnas <- paste(names(iris), collapse = ", ")
+
+# título
+pandoc.header(columnas, level = 4)
+
+# párrafo
+pandoc.p(paste("La observación más alta en largo de pétalos es:", largo_petalo))
+
+# línea separadora
+pandoc.horizontal.rule()
+
+```
+
+Las funciones `pandoc.header()` y `pandoc.p()` sumadas a la opción `results: asis` nos ayudan a que el chunk retorne texto en markdown. Usando los mismos principios, podemos programar un loop que vaya retornando títulos, textos, y más, para que el contenido del documento se vaya escribiendo solo. Si queremos incluir gráficos, tenemos que imprimirlos explícitamente con `plot()`.
+
+Luego del código veremos el contenido resultante, generado de forma automática:
+
+```{r}
+#| results: asis
+#| warning: false
+#| message: false
+#| eval: false
+
+library(ggplot2)
+library(pander)
+library(dplyr)
+
+# iteración por cada valor de la columna `Species`
+for (especie in unique(iris$Species)) {
+  # especie = "setosa"
+  
+  # título con el nombre de la especie
+  pandoc.header(especie, level = 3)
+  
+  # gráfico de dispersión destacando la especie
+  grafico <- iris |> 
+    ggplot() +
+    aes(x = Sepal.Length, y = Sepal.Width, color = Species) +
+    geom_point() +
+    theme_void() +
+    # destacar la especie
+    gghighlight::gghighlight(Species == "setosa")
+  
+  # imprimir gráfico
+  plot(grafico)
+  
+  # obtener una cifra
+  largo_petalo <- iris |> 
+    filter(Species == especie) |> 
+    slice_max(Petal.Length) |> 
+    pull(Petal.Length) |> 
+    unique()
+  
+  # incluir cifra como texto redactado
+  pandoc.p(paste("La observación más alta en largo de pétalos es:", largo_petalo))
+  
+  # barra horizontal
+  pandoc.horizontal.rule()
+}
+```
+
+
+
+
+```{r}
+#| results: asis
+#| warning: false
+#| message: false
+#| eval: true
 #| echo: false
 
 library(ggplot2)
@@ -310,7 +417,7 @@ library(dplyr)
 for (especie in unique(iris$Species)) {
 # especie = "setosa"
 
-pandoc.header(especie, level = 2)
+pandoc.header(especie, level = 3)
 
 grafico <- iris |> 
   ggplot() +
@@ -333,3 +440,4 @@ pandoc.horizontal.rule()
 }
 ```
 
+Usando esta técnica podemos producir documentos muy extensos con poco código, lo que nos vuelve más eficientes y también nos ayuda para actualizar y retocar los reportes, dado que un cambio hecho una sola vez se replica en todos los elementos generados por el loop.
