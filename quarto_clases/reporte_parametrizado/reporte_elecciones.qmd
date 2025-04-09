@@ -19,7 +19,7 @@ library(ggplot2)
 library(forcats)
 library(gt)
 
-datos <- readr::read_csv2("presidenciales_2021_region.csv")
+datos <- readr::read_csv2("datos/presidenciales_2021_region.csv")
 
 # region_elegida <- "Los Ríos"
 

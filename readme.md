@@ -14,9 +14,9 @@ Docente: _Bastián Olea Herrera._ baolea@uc.cl
 
 ### Clase 1: reportes Quarto
 
-Los apuntes de la clase 1 están en el documento Quarto `clase_1.qmd`. Se recomienda abrirlo en RStudio y presionar Render para generarlo.
+Los apuntes de la clase 1 están en el documento Quarto `quarto_clases/clase_1.qmd`. Se recomienda abrirlo en RStudio y presionar Render para generarlo.
 
-El reporte que creamos durante la clase se llama `clase_1b.qmd`, y el reporte parametrizado que vimos es `reporte_elecciones.qmd`.
+El reporte que creamos durante la clase se llama `quarto_clases/clase_1b.qmd`, y el reporte parametrizado que vimos es `quarto_clases/reporte_parametrizado/reporte_elecciones.qmd`.
 
 - creación de documentos Quarto
 - escritura en markdown
@@ -34,7 +34,7 @@ En la carpeta `quarto_reportes` hay material extra, como un ejemplo de reportes 
 
 
 ### Clase 2: personalización de reportes Quarto
-Los apuntes de la clase 2 están en `clase_2.qmd`, y el documento editado durante la clase en `clase_2b.qmd`.
+Los apuntes de la clase 2 están en `quarto_clases/clase_2.qmd`, y el documento editado durante la clase en `clase_2b.qmd`.
 
 - agregar imágenes, videos
 - bloques de código
@@ -50,6 +50,25 @@ Los apuntes de la clase 2 están en `clase_2.qmd`, y el documento editado durant
 - subir documentos Quarto a GitHub
 - compartir documentos Quarto como páginas web con GitHub Pages
 - crear sitios web y blogs con Quarto
+
+
+
+### Clase 3: aplicaciones Shiny
+En `shiny_clases` estarán las apps que vayamos desarrollando
+
+- componentes de las aplicaciones Shiny: ui, server, global
+- principios de las aplicaciones Shiny: reactividad
+- convertir un script en una aplicación
+- agregar texto a las aplicaciones Shiny
+- inputs de las aplicaciones Shiny
+- mostrar gráficos (render) en aplicaciones Shiny
+- conectar inputs a renderers para controlar gráficos
+- personalizar apps Shiny cambiando temas y colores
+- elegir paletas de colores para las apps con `{bslib}` 
+- diseño de aplicación con `{bslib}` en base a tarjetas (`card()`) y columnas (`layour_columns()`)
+- insertar código css para personalizar apariencia de elementos visuales
+- aplicar tema de la app a gráficos `ggplot2` con `{thematic}`
+
 
 ----
 

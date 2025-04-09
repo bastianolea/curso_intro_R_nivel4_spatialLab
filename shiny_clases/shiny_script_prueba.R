@@ -5,7 +5,7 @@ library(readr)
 library(ggplot2)
 
 # carga de datos
-datos <- read_csv2("datos/temperaturas_chile_anuales.csv")
+datos <- read_csv2("shiny_clases/datos/temperaturas_chile_anuales.csv")
 
 # ver nombres de estaciones
 datos |> distinct(nombre) |> print(n=Inf)

@@ -8,7 +8,7 @@ library(thematic)
 
 
 # carga de datos
-datos <- read_csv2("datos/temperaturas_chile_anuales.csv")
+datos <- read_csv2("shiny_clases/datos/temperaturas_chile_anuales.csv")
 
 
 lista_estaciones <- datos |> distinct(nombre) |> pull()

@@ -147,7 +147,7 @@ library(dplyr)
 for (especie in unique(iris$Species)) {
 # especie = "setosa"
 
-pandoc.header(especie, level = 2)
+pandoc.header(especie, level = 3)
 
 grafico <- iris |> 
   ggplot() +
