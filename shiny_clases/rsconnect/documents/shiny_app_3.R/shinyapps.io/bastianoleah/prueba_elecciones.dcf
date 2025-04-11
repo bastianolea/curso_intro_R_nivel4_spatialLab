@@ -1,0 +1,13 @@
+name: prueba_elecciones
+title: prueba_elecciones
+username: bastianoleah
+account: bastianoleah
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14494452
+bundleId: 10095710
+url: https://bastianoleah.shinyapps.io/prueba_elecciones/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: datos/procesar.R|datos/temperaturas_chile_anuales.csv|datos/temperaturas_chile.csv|shint_app_2f.R|shiny_app_1.R|shiny_app_2.R|shiny_app_2b.R|shiny_app_2c.R|shiny_app_2d.R|shiny_app2e.R|shiny_script_prueba.R
