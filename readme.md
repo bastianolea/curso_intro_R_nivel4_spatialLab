@@ -54,7 +54,7 @@ Los apuntes de la clase 2 están en `quarto_clases/clase_2.qmd`, y el documento 
 
 
 ### Clase 3: aplicaciones Shiny
-En `shiny_clases` estarán las apps que vayamos desarrollando
+En `shiny_clases` estarán las apps que vayamos desarrollando. El script `shiny_clases/shiny_app_1.R` es la app realizada en la clase 3.
 
 - componentes de las aplicaciones Shiny: ui, server, global
 - principios de las aplicaciones Shiny: reactividad
@@ -70,7 +70,24 @@ En `shiny_clases` estarán las apps que vayamos desarrollando
 - aplicar tema de la app a gráficos `ggplot2` con `{thematic}`
 
 
+### Clase 3: aplicaciones Shiny
+El script `shiny_clases/shiny_app_2.R` es la app realizada en la clase 4 y final.
+
+- ejemplos de diseño y disposición de aplicaciones Shiny (scripts de apps en `shiny_clases/apps_ejemplos`)
+- pruebas sobre reactividad
+- cálculos condicionales en la app
+- creación de botones
+- textos basados en los datos y que se adaptan mediante condicionalidad
+- notificaciones
+- ventanas emergentes (modulares)
+- publicación de aplicaciones a ShinyApps.io
+
 ----
 
 ## Recursos de Quarto
 - [Guía de Quarto](https://quarto.org/docs/guide/)
+
+
+## Recursos de Shiny
+[Tutorial de Shiny para principiantes](https://bastianolea.rbind.io/blog/r_introduccion/tutorial_shiny_1/)
+[Tutorial para subir apps a ShinyApps.io](https://bastianolea.rbind.io/blog/r_introduccion/tutorial_shinyapps/)
