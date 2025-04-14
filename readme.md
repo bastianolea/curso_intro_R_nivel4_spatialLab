@@ -12,6 +12,14 @@ Docente: _Bastián Olea Herrera._ baolea@uc.cl
 
 ## Contenidos
 
+**Índice de clases:**
+
+1. _Clase 1:_ Reportes Quarto
+2. _Clase 2:_ Personalización de reportes Quarto
+3. _Clase 3:_ Aplicaciones Shiny
+4. _Clase 4:_ Aplicaciones Shiny avanzadas
+
+
 ### Clase 1: reportes Quarto
 
 Los apuntes de la clase 1 están en el documento Quarto `quarto_clases/clase_1.qmd`. Se recomienda abrirlo en RStudio y presionar Render para generarlo.
@@ -70,7 +78,7 @@ En `shiny_clases` estarán las apps que vayamos desarrollando. El script `shiny_
 - aplicar tema de la app a gráficos `ggplot2` con `{thematic}`
 
 
-### Clase 3: aplicaciones Shiny
+### Clase 4: aplicaciones Shiny avanzadas
 El script `shiny_clases/shiny_app_2.R` es la app realizada en la clase 4 y final.
 
 - ejemplos de diseño y disposición de aplicaciones Shiny (scripts de apps en `shiny_clases/apps_ejemplos`)
